@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:auto_route/auto_route.dart';
 
-//  bool toggleObscureText = true;
-//   bool isSwitched = false;
+ bool toggleObscureText = true;
+  bool isSwitched = false;
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
