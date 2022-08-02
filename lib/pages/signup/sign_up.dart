@@ -5,33 +5,16 @@ import 'package:event_hub/pages/widgets/my_textfield.dart';
 import 'package:event_hub/widgets/constants.dart';
 import 'package:event_hub/widgets/my_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignUpPage extends HookWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends State<SignUpPage> {
-  bool toggleObscureText1 = true;
-  bool toggleObscureText2 = true;
-
-  void togglePasswordView1() {
-    setState(() {
-      toggleObscureText1 = !toggleObscureText1;
-    });
-  }
-
-  void togglePasswordView2() {
-    setState(() {
-      toggleObscureText2 = !toggleObscureText2;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final toggleObscureText1 = useState(true);
+    final toggleObscureText2 = useState(true);
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -97,12 +80,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     fit: BoxFit.scaleDown,
                   ),
                 ),
-                obscureText: toggleObscureText1,
+                obscureText: toggleObscureText1.value,
                 hintText: 'Your password',
                 suffixIcon: IconButton(
-                  onPressed: () {
-                    togglePasswordView1();
-                  },
+                  onPressed: () =>
+                      toggleObscureText1.value = !toggleObscureText1.value,
                   icon: SvgPicture.asset(
                     'assets/icons/eye.svg',
                     fit: BoxFit.scaleDown,
@@ -122,12 +104,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     fit: BoxFit.scaleDown,
                   ),
                 ),
-                obscureText: toggleObscureText2,
+                obscureText: toggleObscureText2.value,
                 hintText: 'Confirm password',
                 suffixIcon: IconButton(
-                  onPressed: () {
-                    togglePasswordView2();
-                  },
+                  onPressed: () =>
+                      toggleObscureText2.value = !toggleObscureText2.value,
                   icon: SvgPicture.asset(
                     'assets/icons/eye.svg',
                     fit: BoxFit.scaleDown,
