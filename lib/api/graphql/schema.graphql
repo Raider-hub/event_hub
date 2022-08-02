@@ -1,0 +1,150 @@
+"""Exposes a URL that specifies the behavior of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behavior of this scalar."""
+  url: String!
+) on SCALAR
+
+type Category {
+  id: ID!
+  name: String!
+  event: [Event!]!
+  user: [User!]!
+}
+
+type CategoryPayload {
+  ok: Boolean!
+  message: String!
+  data: Category
+}
+
+input CreateUserInput {
+  fullname: String
+  email: String
+  password: String
+}
+
+type Event {
+  id: ID!
+  title: String!
+  description: String!
+  date: String!
+  time: String!
+  location: String!
+  category: [Category!]!
+  members: [User!]!
+  host: User!
+  createdAt: String!
+  updatedAt: String
+}
+
+input EventCreateInput {
+  title: String!
+  description: String!
+  date: String!
+  time: String!
+  location: String!
+  category: [String!]
+}
+
+type EventPayload {
+  ok: Boolean!
+  message: String!
+  data: Event
+}
+
+input EventUpdateInput {
+  eventId: Int!
+  title: String
+  description: String
+  date: String
+  time: String
+  location: String
+  category: [String!]
+  members: [Int!]
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  create_category(name: String!): CategoryPayload!
+  delete_category(id: Int!): CategoryPayload!
+  create_event(data: EventCreateInput!): EventPayload!
+  update_event(data: EventUpdateInput): EventPayload!
+  delete_event(id: Int!): EventPayload!
+  add_review(data: ReviewInput!): ReviewPayload!
+  edit_review(id: Int!): ReviewPayload!
+  delete_review(id: Int!): ReviewPayload!
+  create_user(data: CreateUserInput!): SignPayload!
+  verify_otp(otp: String!): SignPayload!
+  resend_otp: SignPayload!
+  login(data: LoginInput!): SignPayload!
+  update_profile(data: UpdateUserInput!): UserPayload!
+  delete_user(id: Int!): UserPayload!
+  follow_user(userID: Int!): User!
+  add_interest(interest: [Int!]): [Category!]!
+}
+
+type Query {
+  categories(filter: String): [Category!]!
+  events(filter: String): [Event!]!
+  reviews(filter: String): [Review!]!
+  me: User!
+  users(filter: String): [User!]!
+}
+
+type Review {
+  id: ID!
+  text: String!
+  reting: Int
+  user: [User!]!
+}
+
+input ReviewInput {
+  text: String!
+  reting: Int
+}
+
+type ReviewPayload {
+  ok: Boolean!
+  message: String!
+  data: Review
+}
+
+type SignPayload {
+  ok: Boolean!
+  message: String!
+  token: String
+}
+
+input UpdateUserInput {
+  fullname: String
+  date_of_birth: String
+  location: String
+  about: String
+}
+
+type User {
+  id: ID!
+  fullname: String!
+  dob: String!
+  email: String!
+  about: String!
+  review: [Review!]
+  interest: [Category!]!
+  event: [Event!]!
+  event_hosted: [Event!]!
+  followers: [User!]
+  following: [User!]
+  totalFollowers: Int!
+  totalFollowing: Int!
+}
+
+type UserPayload {
+  ok: Boolean!
+  message: String!
+  data: User
+}
+
