@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:event_hub/pages/sign_in/google_facebook_auth.dart';
 import 'package:event_hub/pages/widgets/my_button.dart';
 import 'package:event_hub/pages/widgets/my_textfield.dart';
@@ -7,31 +5,17 @@ import 'package:event_hub/router/router.gr.dart';
 import 'package:event_hub/widgets/constants.dart';
 import 'package:event_hub/widgets/my_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:auto_route/auto_route.dart';
 
- bool toggleObscureText = true;
-  bool isSwitched = false;
-
-class SignInPage extends StatefulWidget {
+class SignInPage extends HookWidget {
   const SignInPage({Key? key}) : super(key: key);
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
-}
-
-class _SignInPageState extends State<SignInPage> {
-  bool toggleObscureText = true;
-  bool isSwitched = false;
-
-  void togglePasswordView() {
-    setState(() {
-      toggleObscureText = !toggleObscureText;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final toggleObscureText = useState(true);
+    final isSwitched = useState(true);
     return Scaffold(
       backgroundColor: Colors.white,
       body: ListView(
@@ -76,14 +60,13 @@ class _SignInPageState extends State<SignInPage> {
                 fit: BoxFit.scaleDown,
               ),
             ),
-            obscureText: toggleObscureText,
+            obscureText: toggleObscureText.value,
             hintText: 'Your password',
             fontFamily: 'Cereal',
             fontWeight: FontWeight.w400,
             suffixIcon: IconButton(
-              onPressed: () {
-                togglePasswordView();
-              },
+              onPressed: () =>
+                  toggleObscureText.value = !toggleObscureText.value,
               icon: SvgPicture.asset(
                 'assets/icons/eye.svg',
                 fit: BoxFit.scaleDown,
@@ -96,11 +79,9 @@ class _SignInPageState extends State<SignInPage> {
               Row(
                 children: [
                   Switch(
-                    value: isSwitched,
+                    value: isSwitched.value,
                     onChanged: (value) {
-                      setState(() {
-                        isSwitched = value;
-                      });
+                      isSwitched.value = value;
                     },
                     activeTrackColor: primaryColor.withOpacity(0.5),
                     activeColor: primaryColor,
