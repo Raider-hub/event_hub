@@ -11,7 +11,6 @@ import 'package:auto_route/auto_route.dart';
 
 class SignInPage extends HookWidget {
   const SignInPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final toggleObscureText = useState(true);
