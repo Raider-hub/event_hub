@@ -10,6 +10,7 @@
 //
 // ignore_for_file: type=lint
 
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:event_hub/pages/forget_password/forget_password.dart' as _i20;
 import 'package:event_hub/pages/forget_password/verification.dart' as _i21;

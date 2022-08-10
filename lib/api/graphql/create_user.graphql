@@ -1,1 +1,13 @@
-
+mutation create_user(
+  $fullname: String!
+  $email: String!
+  $password:String!
+) {
+  create_user(fullname: $fullname
+  email: $email
+  password: $password){
+    message
+    token
+    ok
+  }
+}

@@ -13,6 +13,10 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GLoginInput.serializer)
       ..add(GReviewInput.serializer)
       ..add(GUpdateUserInput.serializer)
+      ..add(Gcreate_userData.serializer)
+      ..add(Gcreate_userData_create_user.serializer)
+      ..add(Gcreate_userReq.serializer)
+      ..add(Gcreate_userVars.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())
