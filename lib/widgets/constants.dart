@@ -8,3 +8,11 @@ const greyColor = Color(0xFF747688);
 
 const String airbnb = 'Cereal';
 // const String roboto = '';
+
+const pattern =
+    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+
+    const String apitoken = 'token';
+
+    const int otpTime = 10;
+    const int newotpTime = 10;

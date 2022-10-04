@@ -13,7 +13,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:event_hub/pages/forget_password/forget_password.dart' as _i20;
-import 'package:event_hub/pages/forget_password/verification.dart' as _i21;
+import 'package:event_hub/pages/forget_password/forget_password_otp_page.dart'
+    as _i22;
 import 'package:event_hub/pages/home/events_page.dart' as _i16;
 import 'package:event_hub/pages/home/explore_page.dart' as _i15;
 import 'package:event_hub/pages/home/profile_page/edit_profile_page.dart'
@@ -38,12 +39,13 @@ import 'package:event_hub/pages/intrest_choicechip/intrest_choicechip.dart'
 import 'package:event_hub/pages/map/map.dart' as _i17;
 import 'package:event_hub/pages/map/pick_location.dart' as _i2;
 import 'package:event_hub/pages/onboard/onboard_page.dart' as _i1;
+import 'package:event_hub/pages/otp_verification/verrify_otp_page.dart' as _i21;
 import 'package:event_hub/pages/sign_in/sign_in.dart' as _i4;
 import 'package:event_hub/pages/signup/sign_up.dart' as _i5;
-import 'package:flutter/material.dart' as _i22;
+import 'package:flutter/material.dart' as _i23;
 
 class AppRouter extends _i3.RootStackRouter {
-  AppRouter([_i22.GlobalKey<_i22.NavigatorState>? navigatorKey])
+  AppRouter([_i23.GlobalKey<_i23.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -149,8 +151,16 @@ class AppRouter extends _i3.RootStackRouter {
           routeData: routeData, child: const _i20.ForgetPasswordPage());
     },
     VerifyEmailRoute.name: (routeData) {
+      final args = routeData.argsAs<VerifyEmailRouteArgs>();
       return _i3.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i21.VerifyEmailPage());
+          routeData: routeData,
+          child: _i21.VerifyEmailPage(args.userEmail, key: args.key));
+    },
+    VerifyPasswordOtpRoute.name: (routeData) {
+      final args = routeData.argsAs<VerifyPasswordOtpRouteArgs>();
+      return _i3.AdaptivePage<dynamic>(
+          routeData: routeData,
+          child: _i22.VerifyPasswordOtpPage(args.userEmail, key: args.key));
     }
   };
 
@@ -221,7 +231,9 @@ class AppRouter extends _i3.RootStackRouter {
           _i3.RouteConfig(ForgetPasswordRoute.name,
               path: 'forgetpw', parent: ForgetPwRouter.name),
           _i3.RouteConfig(VerifyEmailRoute.name,
-              path: 'verifyemail', parent: ForgetPwRouter.name)
+              path: 'verifyemail', parent: ForgetPwRouter.name),
+          _i3.RouteConfig(VerifyPasswordOtpRoute.name,
+              path: 'verifypasswordemail', parent: ForgetPwRouter.name)
         ]),
         _i3.RouteConfig(SignUpRoute.name, path: 'signup'),
         _i3.RouteConfig(ChoiceChipRoute.name, path: 'choicechip'),
@@ -443,8 +455,49 @@ class ForgetPasswordRoute extends _i3.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i21.VerifyEmailPage]
-class VerifyEmailRoute extends _i3.PageRouteInfo<void> {
-  const VerifyEmailRoute() : super(VerifyEmailRoute.name, path: 'verifyemail');
+class VerifyEmailRoute extends _i3.PageRouteInfo<VerifyEmailRouteArgs> {
+  VerifyEmailRoute({required String userEmail, _i23.Key? key})
+      : super(VerifyEmailRoute.name,
+            path: 'verifyemail',
+            args: VerifyEmailRouteArgs(userEmail: userEmail, key: key));
 
   static const String name = 'VerifyEmailRoute';
+}
+
+class VerifyEmailRouteArgs {
+  const VerifyEmailRouteArgs({required this.userEmail, this.key});
+
+  final String userEmail;
+
+  final _i23.Key? key;
+
+  @override
+  String toString() {
+    return 'VerifyEmailRouteArgs{userEmail: $userEmail, key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i22.VerifyPasswordOtpPage]
+class VerifyPasswordOtpRoute
+    extends _i3.PageRouteInfo<VerifyPasswordOtpRouteArgs> {
+  VerifyPasswordOtpRoute({required String userEmail, _i23.Key? key})
+      : super(VerifyPasswordOtpRoute.name,
+            path: 'verifypasswordemail',
+            args: VerifyPasswordOtpRouteArgs(userEmail: userEmail, key: key));
+
+  static const String name = 'VerifyPasswordOtpRoute';
+}
+
+class VerifyPasswordOtpRouteArgs {
+  const VerifyPasswordOtpRouteArgs({required this.userEmail, this.key});
+
+  final String userEmail;
+
+  final _i23.Key? key;
+
+  @override
+  String toString() {
+    return 'VerifyPasswordOtpRouteArgs{userEmail: $userEmail, key: $key}';
+  }
 }

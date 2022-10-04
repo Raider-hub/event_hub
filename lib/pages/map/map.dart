@@ -183,11 +183,11 @@ class _MapPageState extends State<MapPage> {
                     )
                   ],
                 ),
-                const CustomButton(
+                CustomButton(
                   buttonTxt: 'ADD',
-                //   onPressed: () {
-                //     context.pushRoute(const HiddenDrawerRouter());
-                //   },
+                  onPressed: () {
+                  context.pushRoute(const HiddenDrawerRouter());
+                  },
                 // )
                 )
               ],

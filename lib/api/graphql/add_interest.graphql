@@ -1,0 +1,11 @@
+mutation add_interest(
+  $interest: [Int!]!
+) {
+   add_interest(interest: $interest){
+    id
+    name
+    members {
+      id
+    }  
+  }
+}

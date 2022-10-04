@@ -1,0 +1,7 @@
+mutation resend_otp {
+  resend_otp {
+    message
+    ok
+    token
+  }
+}

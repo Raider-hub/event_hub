@@ -1,8 +1,9 @@
 import 'package:event_hub/pages/intrest_choicechip/choices.dart';
 import 'package:event_hub/widgets/my_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class ChoiceItem extends StatefulWidget {
+class ChoiceItem extends HookWidget {
   final IntrestChoices intrestChoices;
   final ValueChanged<bool> onSelected;
   const ChoiceItem(
@@ -10,25 +11,25 @@ class ChoiceItem extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<ChoiceItem> createState() => _ChoiceItemState();
-}
-
-class _ChoiceItemState extends State<ChoiceItem> {
-  bool _isSelected = false;
-  @override
   Widget build(BuildContext context) {
+    final _isSelected = useState(false);
+
     return Column(
       children: [
         GestureDetector(
-          onTap: (() => setState(() {
-                _isSelected = !_isSelected;
-              })),
+          onTap: () {
+            _isSelected.value = !_isSelected.value;
+
+            onSelected(_isSelected.value);
+
+
+          } ,
           child: AnimatedContainer(
             duration: const Duration(microseconds: 400),
             padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: _isSelected == true
+              border: _isSelected.value == true
                   ? Border.all(
                       width: 2,
                       color: const Color(0xff5669FF),
@@ -43,7 +44,7 @@ class _ChoiceItemState extends State<ChoiceItem> {
                 color: const Color(0xff9C63CD).withOpacity(0.1),
               ),
               child: Image.asset(
-                widget.intrestChoices.image,
+                intrestChoices.image,
                 scale: 0.8,
               ),
             ),
@@ -52,7 +53,7 @@ class _ChoiceItemState extends State<ChoiceItem> {
         const SizedBox(
           height: 15,
         ),
-        MyText(text: widget.intrestChoices.title, size: 18),
+        MyText(text: intrestChoices.title, size: 18),
       ],
     );
   }

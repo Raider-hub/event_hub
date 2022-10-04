@@ -1,27 +1,23 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:event_hub/pages/home/model/side_nav_items_model/menu_item_model.dart';
 import 'package:event_hub/router/router.gr.dart';
 import 'package:event_hub/widgets/constants.dart';
 import 'package:event_hub/widgets/my_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class MenuPage extends StatefulWidget {
-  const MenuPage({
-    Key? key,
-  }) : super(key: key);
+BuildContext? context;
 
-  @override
-  State<MenuPage> createState() => _MenuPageState();
+Future<bool?> _onBackPressed() async {
+  ZoomDrawer.of(context!)!.close();
+  return null;
 }
 
-class _MenuPageState extends State<MenuPage> {
-  Future<bool?> _onBackPressed() async {
-    ZoomDrawer.of(context)!.close();
-    return null;
-  }
+class MenuPage extends HookWidget {
+  const MenuPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -254,12 +250,7 @@ class _MenuPageState extends State<MenuPage> {
                   ),
                   onTap: () async {
                     ZoomDrawer.of(context)!.close();
-
-                    showLogOutDialog(context);
-                    // context
-                    //     .pushRoute(const HiddenDrawerRouter(
-                    //         children: [HelpandFaqRoute()]))
-                    //     .then((value) => ZoomDrawer.of(context)!.close());
+                    logoutDialog(context);
                   },
                 ),
               ),
@@ -296,39 +287,82 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 
-  void showLogOutDialog(BuildContext context) {
-    // set up the buttons
-    Widget cancelButton = TextButton(
-      child: const Text("Cancel"),
-      onPressed: () {
-        finish(context);
-        // context.popRoute();
-        // Navigator.pop(context);
-      },
-    );
-    Widget continueButton = TextButton(
-      child: const Text("Sign Out"),
-      onPressed: () {},
-    );
+//   void showLogOutDialog(BuildContext context) {
+//     // set up the buttons
+//     Widget cancelButton = TextButton(
+//       child: const Text("Cancel"),
+//       onPressed: () {
+//         // finish(context);
+//         // context.popRoute();
+//          Navigator.of(context, rootNavigator: true).pop();
+//       },
+//     );
+//     Widget continueButton = TextButton(
+//       child: const Text("Sign Out"),
+//       onPressed: () {
+//         setValue(apitoken, '');
+//         // context.dis
+//         context.router.popUntilRouteWithName('SignInRoute');
+//       },
+//     );
 
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: const Text("Sign Out"),
-      content: const Text(
-          "Signing out will remove all your EventHub data from this device"),
-      actions: [
-        cancelButton,
-        continueButton,
-      ],
-    );
+//     // set up the AlertDialog
+//     AlertDialog alert = AlertDialog(
+//       title: const Text("Sign Out"),
+//       content: const Text(
+//           "Signing out will remove all your EventHub data from this device"),
+//       actions: [
+//         cancelButton,
+//         continueButton,
+//       ],
+//     );
 
-// showConfirmDialog(context, 'Log Out');
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
+// // showConfirmDialog(context, 'Log Out');
+//     // show the dialog
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return alert;
+//       },
+//     );
+//   }
+  void logoutDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            title: const Text(
+              'Log out',
+              style: TextStyle(
+                fontFamily: 'Segoe',
+              ),
+            ),
+            content: const Text(
+              'Are you sure you want to Logout ?',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Segoe',
+              ),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('CANCEL')),
+              TextButton(
+                  onPressed: () async {
+                    setValue(apitoken, '');
+                     context.router.popUntilRouteWithName('SignInRoute');
+
+                   
+                  },
+                  child: const Text('OK')),
+            ],
+          );
+        });
   }
 }

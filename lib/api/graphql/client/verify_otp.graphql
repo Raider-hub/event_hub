@@ -1,0 +1,7 @@
+mutation  verify_otp($otp :String!) {
+   verify_otp( otp :$otp){
+      message
+    ok
+    token
+  }
+  }

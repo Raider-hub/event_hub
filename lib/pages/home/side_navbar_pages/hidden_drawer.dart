@@ -13,7 +13,7 @@ class HiddenDrawerPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    MenuList currentItem = useMemoized(() => MenuLists.bottomNav);
+    //MenuList currentItem = useMemoized(() => MenuLists.bottomNav);
 
     // final notifier = useListenable<MenuList>(currentItem);
 

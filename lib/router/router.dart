@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:event_hub/pages/forget_password/forget_password.dart';
-import 'package:event_hub/pages/forget_password/verification.dart';
+import 'package:event_hub/pages/forget_password/forget_password_otp_page.dart';
+import 'package:event_hub/pages/otp_verification/verrify_otp_page.dart';
 import 'package:event_hub/pages/home/events_page.dart';
 import 'package:event_hub/pages/home/explore_page.dart';
 import 'package:event_hub/pages/home/profile_page/edit_profile_page.dart';
@@ -114,6 +115,10 @@ import 'package:event_hub/pages/signup/sign_up.dart';
         AutoRoute(
           page: VerifyEmailPage,
           path: 'verifyemail',
+        ),
+         AutoRoute(
+          page: VerifyPasswordOtpPage,
+          path: 'verifypasswordemail',
         )
       ]),
   // AutoRoute(

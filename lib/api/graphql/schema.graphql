@@ -1,14 +1,12 @@
-"""Exposes a URL that specifies the behavior of this scalar."""
+# Exposes a URL that specifies the behavior of this scalar.
 directive @specifiedBy(
-  """The URL that specifies the behavior of this scalar."""
+  # The URL that specifies the behavior of this scalar.
   url: String!
 ) on SCALAR
-
 type Category {
   id: ID!
   name: String!
-  event: [Event!]!
-  user: [User!]!
+  members: [User!]!
 }
 
 type CategoryPayload {
@@ -17,33 +15,18 @@ type CategoryPayload {
   data: Category
 }
 
-input CreateUserInput {
-  fullname: String
-  email: String
-  password: String
-}
-
 type Event {
   id: ID!
   title: String!
   description: String!
+  imgUrl: String!
   date: String!
   time: String!
   location: String!
-  category: [Category!]!
   members: [User!]!
   host: User!
   createdAt: String!
   updatedAt: String
-}
-
-input EventCreateInput {
-  title: String!
-  description: String!
-  date: String!
-  time: String!
-  location: String!
-  category: [String!]
 }
 
 type EventPayload {
@@ -52,59 +35,71 @@ type EventPayload {
   data: Event
 }
 
-input EventUpdateInput {
-  eventId: Int!
-  title: String
-  description: String
-  date: String
-  time: String
-  location: String
-  category: [String!]
-  members: [Int!]
-}
-
-input LoginInput {
-  email: String!
-  password: String!
-}
-
 type Mutation {
   create_category(name: String!): CategoryPayload!
   delete_category(id: Int!): CategoryPayload!
-  create_event(data: EventCreateInput!): EventPayload!
-  update_event(data: EventUpdateInput): EventPayload!
+  create_event(
+    title: String!
+    description: String!
+    cover_photo: Upload!
+    date: String!
+    time: String!
+    location: String!
+    members: [Int!]
+  ): EventPayload!
+  update_event(
+    eventId: Int!
+    title: String
+    description: String
+    cover_photo: Upload
+    date: String
+    time: String
+    location: String
+    members: [Int!]
+  ): EventPayload!
   delete_event(id: Int!): EventPayload!
-  add_review(data: ReviewInput!): ReviewPayload!
-  edit_review(id: Int!): ReviewPayload!
+  invite_friend(userId: [Int!]!, eventId: Int!): EventPayload!
+  add_review(userId: Int!, text: String!, rating: Int): ReviewPayload!
+  edit_review(id: Int!, text: String, rating: Int): ReviewPayload!
   delete_review(id: Int!): ReviewPayload!
-  create_user(data: CreateUserInput!): SignPayload!
+  create_user(
+    fullname: String!
+    email: String!
+    password: String!
+  ): SignPayload!
   verify_otp(otp: String!): SignPayload!
   resend_otp: SignPayload!
-  login(data: LoginInput!): SignPayload!
-  update_profile(data: UpdateUserInput!): UserPayload!
+  login(email: String!, password: String!): SignPayload!
+  forgot_password(email: String!): SignPayload!
+  verify_password_reset(code: String!): SignPayload!
+  reset_password(newPassword: String!): SignPayload!
+  change_password(oldPassword: String!, newPassword: String!): UserPayload!
+  update_profile(
+    fullname: String
+    date_of_birth: String
+    location: String
+    about: String
+  ): UserPayload!
   delete_user(id: Int!): UserPayload!
-  follow_user(userID: Int!): User!
-  add_interest(interest: [Int!]): [Category!]!
+  follow_user(userId: [Int!]!): UserPayload!
+  unfollow_user(userId: [Int!]!): UserPayload!
+  add_interest(interest: [Int!]!): [Category!]!
+  remove_interest(interest: [Int!]!): [Category!]!
 }
 
 type Query {
   categories(filter: String): [Category!]!
   events(filter: String): [Event!]!
   reviews(filter: String): [Review!]!
-  me: User!
+  profile: User!
   users(filter: String): [User!]!
 }
 
 type Review {
   id: ID!
   text: String!
-  reting: Int
+  rating: Int
   user: [User!]!
-}
-
-input ReviewInput {
-  text: String!
-  reting: Int
 }
 
 type ReviewPayload {
@@ -119,23 +114,24 @@ type SignPayload {
   token: String
 }
 
-input UpdateUserInput {
-  fullname: String
-  date_of_birth: String
-  location: String
-  about: String
+type Subscription {
+  new_invitation(userId: Int!): Event!
+  new_follower(userId: Int!): User!
 }
+
+scalar Upload
 
 type User {
   id: ID!
   fullname: String!
-  dob: String!
+  dob: String
   email: String!
-  about: String!
+  location: String
+  about: String
   review: [Review!]
   interest: [Category!]!
-  event: [Event!]!
-  event_hosted: [Event!]!
+  event: [Event!]
+  event_hosted: [Event!]
   followers: [User!]
   following: [User!]
   totalFollowers: Int!
