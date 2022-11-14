@@ -1,5 +1,5 @@
 import 'package:event_hub/Providers/shared_providers.dart';
-import 'package:event_hub/pages/forget_password/forget_password_state.dart';
+import 'package:event_hub/pages/forget_password/provider/forget_password_state.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,5 +33,8 @@ class ForgetPasswordNotifier extends StateNotifier<ForgetPasswordState> {
       state = state.copyWith(
           status: ForgetPasswordStatus.error, message: e.toString());
     }
+
+
+    
   }
 }

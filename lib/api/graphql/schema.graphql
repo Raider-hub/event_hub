@@ -19,10 +19,10 @@ type Event {
   id: ID!
   title: String!
   description: String!
-  imgUrl: String!
+  cover_photo: String!
   date: String!
   time: String!
-  location: String!
+  location: Location!
   members: [User!]!
   host: User!
   createdAt: String!
@@ -35,6 +35,16 @@ type EventPayload {
   data: Event
 }
 
+input ILocation {
+  latitude: String!
+  longitude: String!
+}
+
+type Location {
+  latitude: String!
+  longitude: String!
+}
+
 type Mutation {
   create_category(name: String!): CategoryPayload!
   delete_category(id: Int!): CategoryPayload!
@@ -44,7 +54,7 @@ type Mutation {
     cover_photo: Upload!
     date: String!
     time: String!
-    location: String!
+    location: ILocation!
     members: [Int!]
   ): EventPayload!
   update_event(
@@ -54,7 +64,7 @@ type Mutation {
     cover_photo: Upload
     date: String
     time: String
-    location: String
+    location: ILocation
     members: [Int!]
   ): EventPayload!
   delete_event(id: Int!): EventPayload!
@@ -77,14 +87,16 @@ type Mutation {
   update_profile(
     fullname: String
     date_of_birth: String
-    location: String
+    addres: String
     about: String
   ): UserPayload!
+  choose_location(latitude: String!, longitude: String!): Location!
   delete_user(id: Int!): UserPayload!
   follow_user(userId: [Int!]!): UserPayload!
   unfollow_user(userId: [Int!]!): UserPayload!
   add_interest(interest: [Int!]!): [Category!]!
   remove_interest(interest: [Int!]!): [Category!]!
+  change_profile_pic(photo: Upload!): String!
 }
 
 type Query {
@@ -126,7 +138,8 @@ type User {
   fullname: String!
   dob: String
   email: String!
-  location: String
+  address: String
+  profile_pic: String
   about: String
   review: [Review!]
   interest: [Category!]!

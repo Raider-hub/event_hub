@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:event_hub/pages/intrest_choicechip/choice_item.dart';
 import 'package:event_hub/pages/intrest_choicechip/choices.dart';
 import 'package:event_hub/pages/intrest_choicechip/provider/interest_choice_notifier.dart';
 import 'package:event_hub/pages/widgets/my_button.dart';
+import 'package:event_hub/router/router.gr.dart';
 import 'package:event_hub/widgets/custom_snackbar.dart';
 import 'package:event_hub/widgets/my_text.dart';
 import 'package:flutter/material.dart';
@@ -63,11 +65,12 @@ class ChoiceChipPage extends HookConsumerWidget {
 
                 ref.read(interestChoiceProvider.notifier).addInterest(choices: selectedChoices);
                  print(selectedChoices);
+                   context.pushRoute(const PickLocationRoute() );
 
 
               }
 
-              // context.pushRoute(const PickLocationRoute() );
+           
               
             },
           )

@@ -15,7 +15,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 final _formKey = GlobalKey<FormBuilderState>();
 
@@ -205,7 +204,9 @@ class SignInPage extends HookConsumerWidget {
                 height: 10,
               ),
               GooglefbAuth(onPressed: () {
-                setValue(apitoken, '');
+               // setValue(apitoken, '');
+               context.pushRoute(const PickLocationRoute());
+                
               }),
               const SizedBox(
                 height: 20,

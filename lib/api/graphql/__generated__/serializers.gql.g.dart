@@ -8,6 +8,7 @@ part of 'serializers.gql.dart';
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(FetchPolicy.serializer)
+      ..add(GILocation.serializer)
       ..add(GUpload.serializer)
       ..add(Gadd_interestData.serializer)
       ..add(Gadd_interestData_add_interest.serializer)

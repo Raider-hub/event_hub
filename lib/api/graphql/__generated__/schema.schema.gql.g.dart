@@ -6,6 +6,149 @@ part of 'schema.schema.gql.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+Serializer<GILocation> _$gILocationSerializer = new _$GILocationSerializer();
+
+class _$GILocationSerializer implements StructuredSerializer<GILocation> {
+  @override
+  final Iterable<Type> types = const [GILocation, _$GILocation];
+  @override
+  final String wireName = 'GILocation';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GILocation object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'latitude',
+      serializers.serialize(object.latitude,
+          specifiedType: const FullType(String)),
+      'longitude',
+      serializers.serialize(object.longitude,
+          specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GILocation deserialize(Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GILocationBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'latitude':
+          result.latitude = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'longitude':
+          result.longitude = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GILocation extends GILocation {
+  @override
+  final String latitude;
+  @override
+  final String longitude;
+
+  factory _$GILocation([void Function(GILocationBuilder)? updates]) =>
+      (new GILocationBuilder()..update(updates))._build();
+
+  _$GILocation._({required this.latitude, required this.longitude})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(latitude, r'GILocation', 'latitude');
+    BuiltValueNullFieldError.checkNotNull(
+        longitude, r'GILocation', 'longitude');
+  }
+
+  @override
+  GILocation rebuild(void Function(GILocationBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GILocationBuilder toBuilder() => new GILocationBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GILocation &&
+        latitude == other.latitude &&
+        longitude == other.longitude;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, latitude.hashCode), longitude.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GILocation')
+          ..add('latitude', latitude)
+          ..add('longitude', longitude))
+        .toString();
+  }
+}
+
+class GILocationBuilder implements Builder<GILocation, GILocationBuilder> {
+  _$GILocation? _$v;
+
+  String? _latitude;
+  String? get latitude => _$this._latitude;
+  set latitude(String? latitude) => _$this._latitude = latitude;
+
+  String? _longitude;
+  String? get longitude => _$this._longitude;
+  set longitude(String? longitude) => _$this._longitude = longitude;
+
+  GILocationBuilder();
+
+  GILocationBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _latitude = $v.latitude;
+      _longitude = $v.longitude;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GILocation other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GILocation;
+  }
+
+  @override
+  void update(void Function(GILocationBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GILocation build() => _build();
+
+  _$GILocation _build() {
+    final _$result = _$v ??
+        new _$GILocation._(
+            latitude: BuiltValueNullFieldError.checkNotNull(
+                latitude, r'GILocation', 'latitude'),
+            longitude: BuiltValueNullFieldError.checkNotNull(
+                longitude, r'GILocation', 'longitude'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$GUpload extends GUpload {
   @override
   final String value;

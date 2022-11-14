@@ -37,7 +37,7 @@ import 'package:event_hub/api/graphql/__generated__/reset_password.req.gql.dart'
 import 'package:event_hub/api/graphql/__generated__/reset_password.var.gql.dart'
     show Greset_passwordVars;
 import 'package:event_hub/api/graphql/__generated__/schema.schema.gql.dart'
-    show GUpload;
+    show GILocation, GUpload;
 import 'package:event_hub/api/graphql/__generated__/verify_password_reset.data.gql.dart'
     show
         Gverify_password_resetData,
@@ -68,6 +68,7 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   ..add(OperationSerializer())
   ..addPlugin(StandardJsonPlugin());
 @SerializersFor([
+  GILocation,
   GUpload,
   Gadd_interestData,
   Gadd_interestData_add_interest,

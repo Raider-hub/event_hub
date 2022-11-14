@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:event_hub/pages/forget_password/provider/verify_password_notifier.dart';
-import 'package:event_hub/pages/forget_password/verify_password_state.dart';
+import 'package:event_hub/pages/forget_password/state/verify_password_state.dart';
 import 'package:event_hub/pages/otp_verification/otp_field.dart';
 import 'package:event_hub/pages/otp_verification/provider/countdown_notifier.dart';
 import 'package:event_hub/pages/otp_verification/provider/resend_otp_notifier.dart';
@@ -19,21 +19,22 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 class VerifyPasswordOtpPage extends HookConsumerWidget {
-  const VerifyPasswordOtpPage(this.userEmail, {Key? key,}) : super(key: key);
+  const VerifyPasswordOtpPage(
+    this.userEmail, {
+    Key? key,
+  }) : super(key: key);
 
   final String userEmail;
 
   @override
   Widget build(BuildContext context, ref) {
-  
-    ref.listen<VerifyPasswordState>(verifyPasswordProvider, (previous, current) {
+    ref.listen<VerifyPasswordState>(verifyPasswordProvider,
+        (previous, current) {
       if (current.status == VerifyPasswordStatus.loading) {
         context.loaderOverlay.show();
       } else if (current.status == VerifyPasswordStatus.success) {
         context.loaderOverlay.hide();
-
-        //working on the password page
-        // context.pushRoute(const ChoiceChipRoute());
+        context.pushRoute(const NewPasswordRoute());
       } else if (current.status == VerifyPasswordStatus.error) {
         context.loaderOverlay.hide();
 
@@ -42,18 +43,13 @@ class VerifyPasswordOtpPage extends HookConsumerWidget {
       }
     });
 
+
     ref.listen<ResendOtpState>(resendOtpProvider, (previous, current) {
       if (current.status == ResendOtpStatus.loading) {
         context.loaderOverlay.show();
       } else if (current.status == ResendOtpStatus.success) {
-         context.loaderOverlay.hide();
-
-
-
-        // MyCustomSnackBar.sucess(
-        //     message: '', context: context);
-
-
+        MyCustomSnackBar.sucess(
+            message: current.message.toString(), context: context);
 
         context.loaderOverlay.hide();
       } else if (current.status == ResendOtpStatus.error) {
@@ -63,6 +59,7 @@ class VerifyPasswordOtpPage extends HookConsumerWidget {
 
       }
     });
+
 
     // ref.listen(countDownProvider, (previous, current) {
     //   if (current == CountDownStatus.started) {

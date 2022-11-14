@@ -12,9 +12,13 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i3;
-import 'package:event_hub/pages/forget_password/forget_password.dart' as _i20;
 import 'package:event_hub/pages/forget_password/forget_password_otp_page.dart'
     as _i22;
+import 'package:event_hub/pages/forget_password/forget_password_page.dart'
+    as _i20;
+import 'package:event_hub/pages/forget_password/new_password_page.dart' as _i23;
+import 'package:event_hub/pages/forget_password/password_change_cornfimation_page.dart'
+    as _i24;
 import 'package:event_hub/pages/home/events_page.dart' as _i16;
 import 'package:event_hub/pages/home/explore_page.dart' as _i15;
 import 'package:event_hub/pages/home/profile_page/edit_profile_page.dart'
@@ -42,10 +46,10 @@ import 'package:event_hub/pages/onboard/onboard_page.dart' as _i1;
 import 'package:event_hub/pages/otp_verification/verrify_otp_page.dart' as _i21;
 import 'package:event_hub/pages/sign_in/sign_in.dart' as _i4;
 import 'package:event_hub/pages/signup/sign_up.dart' as _i5;
-import 'package:flutter/material.dart' as _i23;
+import 'package:flutter/material.dart' as _i25;
 
 class AppRouter extends _i3.RootStackRouter {
-  AppRouter([_i23.GlobalKey<_i23.NavigatorState>? navigatorKey])
+  AppRouter([_i25.GlobalKey<_i25.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -161,6 +165,14 @@ class AppRouter extends _i3.RootStackRouter {
       return _i3.AdaptivePage<dynamic>(
           routeData: routeData,
           child: _i22.VerifyPasswordOtpPage(args.userEmail, key: args.key));
+    },
+    NewPasswordRoute.name: (routeData) {
+      return _i3.AdaptivePage<dynamic>(
+          routeData: routeData, child: const _i23.NewPasswordPage());
+    },
+    PasswordChangeDoneRoute.name: (routeData) {
+      return _i3.AdaptivePage<dynamic>(
+          routeData: routeData, child: const _i24.PasswordChangeDonePage());
     }
   };
 
@@ -233,7 +245,11 @@ class AppRouter extends _i3.RootStackRouter {
           _i3.RouteConfig(VerifyEmailRoute.name,
               path: 'verifyemail', parent: ForgetPwRouter.name),
           _i3.RouteConfig(VerifyPasswordOtpRoute.name,
-              path: 'verifypasswordemail', parent: ForgetPwRouter.name)
+              path: 'verifypasswordemail', parent: ForgetPwRouter.name),
+          _i3.RouteConfig(NewPasswordRoute.name,
+              path: 'newpasswordpage', parent: ForgetPwRouter.name),
+          _i3.RouteConfig(PasswordChangeDoneRoute.name,
+              path: 'newpasswordpage', parent: ForgetPwRouter.name)
         ]),
         _i3.RouteConfig(SignUpRoute.name, path: 'signup'),
         _i3.RouteConfig(ChoiceChipRoute.name, path: 'choicechip'),
@@ -456,7 +472,7 @@ class ForgetPasswordRoute extends _i3.PageRouteInfo<void> {
 /// generated route for
 /// [_i21.VerifyEmailPage]
 class VerifyEmailRoute extends _i3.PageRouteInfo<VerifyEmailRouteArgs> {
-  VerifyEmailRoute({required String userEmail, _i23.Key? key})
+  VerifyEmailRoute({required String userEmail, _i25.Key? key})
       : super(VerifyEmailRoute.name,
             path: 'verifyemail',
             args: VerifyEmailRouteArgs(userEmail: userEmail, key: key));
@@ -469,7 +485,7 @@ class VerifyEmailRouteArgs {
 
   final String userEmail;
 
-  final _i23.Key? key;
+  final _i25.Key? key;
 
   @override
   String toString() {
@@ -481,7 +497,7 @@ class VerifyEmailRouteArgs {
 /// [_i22.VerifyPasswordOtpPage]
 class VerifyPasswordOtpRoute
     extends _i3.PageRouteInfo<VerifyPasswordOtpRouteArgs> {
-  VerifyPasswordOtpRoute({required String userEmail, _i23.Key? key})
+  VerifyPasswordOtpRoute({required String userEmail, _i25.Key? key})
       : super(VerifyPasswordOtpRoute.name,
             path: 'verifypasswordemail',
             args: VerifyPasswordOtpRouteArgs(userEmail: userEmail, key: key));
@@ -494,10 +510,28 @@ class VerifyPasswordOtpRouteArgs {
 
   final String userEmail;
 
-  final _i23.Key? key;
+  final _i25.Key? key;
 
   @override
   String toString() {
     return 'VerifyPasswordOtpRouteArgs{userEmail: $userEmail, key: $key}';
   }
+}
+
+/// generated route for
+/// [_i23.NewPasswordPage]
+class NewPasswordRoute extends _i3.PageRouteInfo<void> {
+  const NewPasswordRoute()
+      : super(NewPasswordRoute.name, path: 'newpasswordpage');
+
+  static const String name = 'NewPasswordRoute';
+}
+
+/// generated route for
+/// [_i24.PasswordChangeDonePage]
+class PasswordChangeDoneRoute extends _i3.PageRouteInfo<void> {
+  const PasswordChangeDoneRoute()
+      : super(PasswordChangeDoneRoute.name, path: 'newpasswordpage');
+
+  static const String name = 'PasswordChangeDoneRoute';
 }

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:event_hub/model/user_model.dart';
-import 'package:event_hub/pages/forget_password/forget_password_state.dart';
+import 'package:event_hub/pages/forget_password/provider/forget_password_state.dart';
 import 'package:event_hub/pages/forget_password/provider/forget_password_notiifier.dart';
 import 'package:event_hub/pages/widgets/custom_form.dart';
 import 'package:event_hub/pages/widgets/my_button.dart';

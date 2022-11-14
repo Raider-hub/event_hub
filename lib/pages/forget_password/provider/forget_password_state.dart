@@ -1,6 +1,6 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'forget_password_state.freezed.dart';
+part '../state/forget_password_state.freezed.dart';
 
 enum ForgetPasswordStatus { initial, loading, success, error}
 

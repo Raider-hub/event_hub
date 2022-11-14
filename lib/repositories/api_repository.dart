@@ -179,20 +179,23 @@ class ApiRepository implements BaseApiRepository {
 
   @override
   Future<void> resetPassword({required user}) async {
-    try {} catch (e) {
+    try {
       final resetPassword =
-          Greset_passwordReq((b) => b..vars.password = user.password);
+          Greset_passwordReq((b) => b..vars.newpassword = user.password);
 
-          var response = await _client.request(resetPassword).first;
+      var response = await _client.request(resetPassword).first;
 
-          bool _apiResponse = response.data != null && response.data!.reset_password.message.toString() == 'true';
+      bool _apiResponse = response.data != null &&
+          response.data!.reset_password.message.toString() == 'true';
 
-          if (_apiResponse) {
-
-            
-          } else{
-            
-          }
+      if (_apiResponse) {
+        final token = response.data!.reset_password.token.toString();
+        await setValue(apitoken, token);
+      } else {
+        throw response.graphqlErrors!.first.message.toString();
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }

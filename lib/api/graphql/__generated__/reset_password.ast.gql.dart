@@ -8,7 +8,7 @@ const reset_password = _i1.OperationDefinitionNode(
     name: _i1.NameNode(value: 'reset_password'),
     variableDefinitions: [
       _i1.VariableDefinitionNode(
-          variable: _i1.VariableNode(name: _i1.NameNode(value: 'password')),
+          variable: _i1.VariableNode(name: _i1.NameNode(value: 'newpassword')),
           type: _i1.NamedTypeNode(
               name: _i1.NameNode(value: 'String'), isNonNull: true),
           defaultValue: _i1.DefaultValueNode(value: null),
@@ -21,8 +21,9 @@ const reset_password = _i1.OperationDefinitionNode(
           alias: null,
           arguments: [
             _i1.ArgumentNode(
-                name: _i1.NameNode(value: 'password'),
-                value: _i1.VariableNode(name: _i1.NameNode(value: 'password')))
+                name: _i1.NameNode(value: 'newPassword'),
+                value:
+                    _i1.VariableNode(name: _i1.NameNode(value: 'newpassword')))
           ],
           directives: [],
           selectionSet: _i1.SelectionSetNode(selections: [

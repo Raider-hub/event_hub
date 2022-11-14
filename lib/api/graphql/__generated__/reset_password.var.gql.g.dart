@@ -24,8 +24,8 @@ class _$Greset_passwordVarsSerializer
       Serializers serializers, Greset_passwordVars object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'password',
-      serializers.serialize(object.password,
+      'newpassword',
+      serializers.serialize(object.newpassword,
           specifiedType: const FullType(String)),
     ];
 
@@ -44,8 +44,8 @@ class _$Greset_passwordVarsSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'password':
-          result.password = serializers.deserialize(value,
+        case 'newpassword':
+          result.newpassword = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
       }
@@ -57,15 +57,15 @@ class _$Greset_passwordVarsSerializer
 
 class _$Greset_passwordVars extends Greset_passwordVars {
   @override
-  final String password;
+  final String newpassword;
 
   factory _$Greset_passwordVars(
           [void Function(Greset_passwordVarsBuilder)? updates]) =>
       (new Greset_passwordVarsBuilder()..update(updates))._build();
 
-  _$Greset_passwordVars._({required this.password}) : super._() {
+  _$Greset_passwordVars._({required this.newpassword}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        password, r'Greset_passwordVars', 'password');
+        newpassword, r'Greset_passwordVars', 'newpassword');
   }
 
   @override
@@ -80,18 +80,18 @@ class _$Greset_passwordVars extends Greset_passwordVars {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Greset_passwordVars && password == other.password;
+    return other is Greset_passwordVars && newpassword == other.newpassword;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, password.hashCode));
+    return $jf($jc(0, newpassword.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'Greset_passwordVars')
-          ..add('password', password))
+          ..add('newpassword', newpassword))
         .toString();
   }
 }
@@ -100,16 +100,16 @@ class Greset_passwordVarsBuilder
     implements Builder<Greset_passwordVars, Greset_passwordVarsBuilder> {
   _$Greset_passwordVars? _$v;
 
-  String? _password;
-  String? get password => _$this._password;
-  set password(String? password) => _$this._password = password;
+  String? _newpassword;
+  String? get newpassword => _$this._newpassword;
+  set newpassword(String? newpassword) => _$this._newpassword = newpassword;
 
   Greset_passwordVarsBuilder();
 
   Greset_passwordVarsBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _password = $v.password;
+      _newpassword = $v.newpassword;
       _$v = null;
     }
     return this;
@@ -132,8 +132,8 @@ class Greset_passwordVarsBuilder
   _$Greset_passwordVars _build() {
     final _$result = _$v ??
         new _$Greset_passwordVars._(
-            password: BuiltValueNullFieldError.checkNotNull(
-                password, r'Greset_passwordVars', 'password'));
+            newpassword: BuiltValueNullFieldError.checkNotNull(
+                newpassword, r'Greset_passwordVars', 'newpassword'));
     replace(_$result);
     return _$result;
   }

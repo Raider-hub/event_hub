@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:event_hub/pages/forget_password/forget_password.dart';
+import 'package:event_hub/pages/forget_password/forget_password_page.dart';
 import 'package:event_hub/pages/forget_password/forget_password_otp_page.dart';
+import 'package:event_hub/pages/forget_password/new_password_page.dart';
+import 'package:event_hub/pages/forget_password/password_change_cornfimation_page.dart';
 import 'package:event_hub/pages/otp_verification/verrify_otp_page.dart';
 import 'package:event_hub/pages/home/events_page.dart';
 import 'package:event_hub/pages/home/explore_page.dart';
@@ -14,7 +16,6 @@ import 'package:event_hub/pages/home/side_navbar_pages/help_and_faq_page.dart';
 import 'package:event_hub/pages/home/side_navbar_pages/hidden_drawer.dart';
 import 'package:event_hub/pages/home/side_navbar_pages/message_page.dart';
 import 'package:event_hub/pages/home/side_navbar_pages/settings_page.dart';
-import 'package:event_hub/pages/homenavbar/bottom_navbar.dart';
 import 'package:event_hub/pages/intrest_choicechip/intrest_choicechip.dart';
 import 'package:event_hub/pages/map/map.dart';
 import 'package:event_hub/pages/map/pick_location.dart';
@@ -119,7 +120,11 @@ import 'package:event_hub/pages/signup/sign_up.dart';
          AutoRoute(
           page: VerifyPasswordOtpPage,
           path: 'verifypasswordemail',
-        )
+        ),
+        AutoRoute( page: NewPasswordPage,
+        path: 'newpasswordpage' ),
+         AutoRoute( page: PasswordChangeDonePage,
+        path: 'newpasswordpage' )
       ]),
   // AutoRoute(
   //   page: MapPage,

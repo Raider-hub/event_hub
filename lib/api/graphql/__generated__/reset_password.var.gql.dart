@@ -15,7 +15,7 @@ abstract class Greset_passwordVars
   factory Greset_passwordVars(
       [Function(Greset_passwordVarsBuilder b) updates]) = _$Greset_passwordVars;
 
-  String get password;
+  String get newpassword;
   static Serializer<Greset_passwordVars> get serializer =>
       _$gresetPasswordVarsSerializer;
   Map<String, dynamic> toJson() =>

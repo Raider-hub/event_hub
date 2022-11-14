@@ -1,5 +1,6 @@
 import 'package:event_hub/Providers/shared_providers.dart';
-import 'package:event_hub/pages/forget_password/verify_password_state.dart';
+import 'package:event_hub/pages/forget_password/state/verify_password_state.dart';
+
 import 'package:event_hub/repositories/api_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

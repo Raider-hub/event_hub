@@ -89,7 +89,7 @@ const Event = _i1.ObjectTypeDefinitionNode(
           type: _i1.NamedTypeNode(
               name: _i1.NameNode(value: 'String'), isNonNull: true)),
       _i1.FieldDefinitionNode(
-          name: _i1.NameNode(value: 'imgUrl'),
+          name: _i1.NameNode(value: 'cover_photo'),
           directives: [],
           args: [],
           type: _i1.NamedTypeNode(
@@ -111,7 +111,7 @@ const Event = _i1.ObjectTypeDefinitionNode(
           directives: [],
           args: [],
           type: _i1.NamedTypeNode(
-              name: _i1.NameNode(value: 'String'), isNonNull: true)),
+              name: _i1.NameNode(value: 'Location'), isNonNull: true)),
       _i1.FieldDefinitionNode(
           name: _i1.NameNode(value: 'members'),
           directives: [],
@@ -162,6 +162,41 @@ const EventPayload = _i1.ObjectTypeDefinitionNode(
           args: [],
           type: _i1.NamedTypeNode(
               name: _i1.NameNode(value: 'Event'), isNonNull: false))
+    ]);
+const ILocation = _i1.InputObjectTypeDefinitionNode(
+    name: _i1.NameNode(value: 'ILocation'),
+    directives: [],
+    fields: [
+      _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'latitude'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+              name: _i1.NameNode(value: 'String'), isNonNull: true),
+          defaultValue: null),
+      _i1.InputValueDefinitionNode(
+          name: _i1.NameNode(value: 'longitude'),
+          directives: [],
+          type: _i1.NamedTypeNode(
+              name: _i1.NameNode(value: 'String'), isNonNull: true),
+          defaultValue: null)
+    ]);
+const Location = _i1.ObjectTypeDefinitionNode(
+    name: _i1.NameNode(value: 'Location'),
+    directives: [],
+    interfaces: [],
+    fields: [
+      _i1.FieldDefinitionNode(
+          name: _i1.NameNode(value: 'latitude'),
+          directives: [],
+          args: [],
+          type: _i1.NamedTypeNode(
+              name: _i1.NameNode(value: 'String'), isNonNull: true)),
+      _i1.FieldDefinitionNode(
+          name: _i1.NameNode(value: 'longitude'),
+          directives: [],
+          args: [],
+          type: _i1.NamedTypeNode(
+              name: _i1.NameNode(value: 'String'), isNonNull: true))
     ]);
 const Mutation = _i1.ObjectTypeDefinitionNode(
     name: _i1.NameNode(value: 'Mutation'),
@@ -232,7 +267,7 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
                 name: _i1.NameNode(value: 'location'),
                 directives: [],
                 type: _i1.NamedTypeNode(
-                    name: _i1.NameNode(value: 'String'), isNonNull: true),
+                    name: _i1.NameNode(value: 'ILocation'), isNonNull: true),
                 defaultValue: null),
             _i1.InputValueDefinitionNode(
                 name: _i1.NameNode(value: 'members'),
@@ -289,7 +324,7 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
                 name: _i1.NameNode(value: 'location'),
                 directives: [],
                 type: _i1.NamedTypeNode(
-                    name: _i1.NameNode(value: 'String'), isNonNull: false),
+                    name: _i1.NameNode(value: 'ILocation'), isNonNull: false),
                 defaultValue: null),
             _i1.InputValueDefinitionNode(
                 name: _i1.NameNode(value: 'members'),
@@ -537,7 +572,7 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
                     name: _i1.NameNode(value: 'String'), isNonNull: false),
                 defaultValue: null),
             _i1.InputValueDefinitionNode(
-                name: _i1.NameNode(value: 'location'),
+                name: _i1.NameNode(value: 'addres'),
                 directives: [],
                 type: _i1.NamedTypeNode(
                     name: _i1.NameNode(value: 'String'), isNonNull: false),
@@ -551,6 +586,25 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
           ],
           type: _i1.NamedTypeNode(
               name: _i1.NameNode(value: 'UserPayload'), isNonNull: true)),
+      _i1.FieldDefinitionNode(
+          name: _i1.NameNode(value: 'choose_location'),
+          directives: [],
+          args: [
+            _i1.InputValueDefinitionNode(
+                name: _i1.NameNode(value: 'latitude'),
+                directives: [],
+                type: _i1.NamedTypeNode(
+                    name: _i1.NameNode(value: 'String'), isNonNull: true),
+                defaultValue: null),
+            _i1.InputValueDefinitionNode(
+                name: _i1.NameNode(value: 'longitude'),
+                directives: [],
+                type: _i1.NamedTypeNode(
+                    name: _i1.NameNode(value: 'String'), isNonNull: true),
+                defaultValue: null)
+          ],
+          type: _i1.NamedTypeNode(
+              name: _i1.NameNode(value: 'Location'), isNonNull: true)),
       _i1.FieldDefinitionNode(
           name: _i1.NameNode(value: 'delete_user'),
           directives: [],
@@ -627,7 +681,20 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
           type: _i1.ListTypeNode(
               type: _i1.NamedTypeNode(
                   name: _i1.NameNode(value: 'Category'), isNonNull: true),
-              isNonNull: true))
+              isNonNull: true)),
+      _i1.FieldDefinitionNode(
+          name: _i1.NameNode(value: 'change_profile_pic'),
+          directives: [],
+          args: [
+            _i1.InputValueDefinitionNode(
+                name: _i1.NameNode(value: 'photo'),
+                directives: [],
+                type: _i1.NamedTypeNode(
+                    name: _i1.NameNode(value: 'Upload'), isNonNull: true),
+                defaultValue: null)
+          ],
+          type: _i1.NamedTypeNode(
+              name: _i1.NameNode(value: 'String'), isNonNull: true))
     ]);
 const Query = _i1.ObjectTypeDefinitionNode(
     name: _i1.NameNode(value: 'Query'),
@@ -845,7 +912,13 @@ const User = _i1.ObjectTypeDefinitionNode(
           type: _i1.NamedTypeNode(
               name: _i1.NameNode(value: 'String'), isNonNull: true)),
       _i1.FieldDefinitionNode(
-          name: _i1.NameNode(value: 'location'),
+          name: _i1.NameNode(value: 'address'),
+          directives: [],
+          args: [],
+          type: _i1.NamedTypeNode(
+              name: _i1.NameNode(value: 'String'), isNonNull: false)),
+      _i1.FieldDefinitionNode(
+          name: _i1.NameNode(value: 'profile_pic'),
           directives: [],
           args: [],
           type: _i1.NamedTypeNode(
@@ -947,6 +1020,8 @@ const document = _i1.DocumentNode(definitions: [
   CategoryPayload,
   Event,
   EventPayload,
+  ILocation,
+  Location,
   Mutation,
   Query,
   Review,
